@@ -15,7 +15,15 @@
 import Header from "./components/Header/Header.vue";
 import List from "./components/List/List.vue";
 import Footer from "./components/Footer/Footer.vue";
-import { defineComponent, reactive, toRefs, provide } from "vue";
+import { saveLocalStorage, readLocalStorage } from "./utils/localStorageUtils";
+import {
+  defineComponent,
+  reactive,
+  toRefs,
+  provide,
+  watch,
+  onMounted,
+} from "vue";
 export default defineComponent({
   name: "App",
   components: {
@@ -26,12 +34,19 @@ export default defineComponent({
   setup() {
     const todolists = reactive({
       todoItem: [
-        { id: 1, value: "鸡肉", isCheckbox: false },
-        { id: 2, value: "猪肉", isCheckbox: true },
-        { id: 3, value: "牛肉", isCheckbox: false },
-        { id: 4, value: "鸭肉", isCheckbox: false },
+        //数据格式
+        // { id: 1, value: "鸡肉", isCheckbox: false },
+        // { id: 2, value: "猪肉", isCheckbox: true },
+        // { id: 3, value: "牛肉", isCheckbox: false },
+        // { id: 4, value: "鸭肉", isCheckbox: false },
       ],
     });
+
+    // 界面加载完毕后读取数据
+    onMounted(() => {
+      todolists.todoItem = readLocalStorage();
+    });
+
     //添加数据
     const addTodo = (Todo) => {
       todolists.todoItem.unshift(Todo);
@@ -62,6 +77,15 @@ export default defineComponent({
       });
     };
 
+    // 监视操作:如果todoItem数组的数据变化了,直接存储到浏览器的缓存中
+    watch(
+      () => todolists.todoItem,
+      (value) => {
+        // 保存到浏览器的缓存中
+        saveLocalStorage(value);
+      },
+      { deep: true }
+    );
     return {
       ...toRefs(todolists),
       addTodo,
