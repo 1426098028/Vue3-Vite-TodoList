@@ -11,7 +11,7 @@
 import Header from "./components/Header/Header.vue";
 import List from "./components/List/List.vue";
 import Footer from "./components/Footer/Footer.vue";
-import { defineComponent, reactive, toRefs } from "vue";
+import { defineComponent, reactive, toRefs, provide } from "vue";
 export default defineComponent({
   name: "App",
   components: {
@@ -33,10 +33,16 @@ export default defineComponent({
       todolists.todoItem.unshift(Todo);
       console.log(Todo);
     };
-    
+    //删除数据
+    provide("delTodo", delTodo); //传递爷组件的方法给孙子组件
+    const delTodo = (index) => {
+      todolists.todoItem.splice(index, 1);
+    };
+
     return {
       ...toRefs(todolists),
       addTodo,
+      delTodo,
     };
   },
 });

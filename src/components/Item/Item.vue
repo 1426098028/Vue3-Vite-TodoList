@@ -7,33 +7,41 @@
     <button
       class="btn btn-danger"
       v-show="Discoloration === 'MoveinColor' ? true : false"
+      @click="Delete"
     >
       删除
     </button>
   </li>
 </template>
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, inject } from "vue";
 export default defineComponent({
-  name: "Item",
-  props: ["todo"],
-  setup() {
+  name: "Item", //孙子组件
+  props: ["todo", "index"],
+  setup(props) {
     const Discoloration = ref("");
-    // 鼠标移入
+
+    const delTodo = inject("delTodo");
+    // 鼠标移入样式变化显示删除按钮
     const Movein = () => {
       Discoloration.value = "MoveinColor";
-      console.log("移入");
     };
-    //鼠标移出
+    // 鼠标移出样式变化显示删除按钮
     const Remove = () => {
       Discoloration.value = "RemoveColor";
-
-      console.log("移出");
+    };
+    //删除数据方法
+    const Delete = () => {
+      if (window.confirm("确定删除吗？")) {
+        //接收爷组件的方法
+        delTodo(props.index);
+      }
     };
     return {
       Discoloration,
       Movein,
       Remove,
+      Delete,
     };
   },
 });
