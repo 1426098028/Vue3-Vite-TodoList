@@ -1,20 +1,40 @@
 <template>
-  <li>
+  <li @mouseenter="Movein" @mouseleave="Remove" :class="Discoloration">
     <label>
       <input type="checkbox" v-model="todo.isCheckbox" />
-
       <span>{{ todo.value }}</span>
     </label>
-    <button class="btn btn-danger" style="display: none">删除</button>
+    <button
+      class="btn btn-danger"
+      v-show="Discoloration === 'MoveinColor' ? true : false"
+    >
+      删除
+    </button>
   </li>
 </template>
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 export default defineComponent({
   name: "Item",
   props: ["todo"],
   setup() {
-    return {};
+    const Discoloration = ref("");
+    // 鼠标移入
+    const Movein = () => {
+      Discoloration.value = "MoveinColor";
+      console.log("移入");
+    };
+    //鼠标移出
+    const Remove = () => {
+      Discoloration.value = "RemoveColor";
+
+      console.log("移出");
+    };
+    return {
+      Discoloration,
+      Movein,
+      Remove,
+    };
   },
 });
 </script>
@@ -27,7 +47,14 @@ li {
   padding: 0 5px;
   border-bottom: 1px solid #ddd;
 }
-
+.MoveinColor {
+  color: rgb(68, 66, 66);
+  background: pink;
+}
+.RemoveColor {
+  color: black;
+  background: transparent;
+}
 li label {
   float: left;
   cursor: pointer;
@@ -42,7 +69,6 @@ li label li input {
 
 li button {
   float: right;
-  display: none;
   margin-top: 3px;
 }
 
