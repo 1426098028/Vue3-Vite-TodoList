@@ -7,14 +7,16 @@
     <span>
       <span>已完成 {{ count }}</span> / 全部 {{ todoItem.length }}
     </span>
-    <button class="btn btn-danger">清除已完成任务</button>
+    <button class="btn btn-danger" @click="ClearSelected">
+      清除已完成任务
+    </button>
   </div>
 </template>
 <script>
 import { defineComponent, computed } from "vue";
 export default defineComponent({
   name: "Footer",
-  props: ["todoItem", "checkAll"],
+  props: ["todoItem", "checkAll", "ClearSelected"],
   setup(props) {
     // 已完成的计算属性操作
     const count = computed({

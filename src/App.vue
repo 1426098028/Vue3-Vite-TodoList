@@ -3,7 +3,11 @@
     <div class="todo-wrap">
       <Header :addTodo="addTodo" />
       <List :todoItem="todoItem" />
-      <Footer :todoItem="todoItem" :checkAll="checkAll" />
+      <Footer
+        :todoItem="todoItem"
+        :checkAll="checkAll"
+        :ClearSelected="ClearSelected"
+      />
     </div>
   </div>
 </template>
@@ -51,12 +55,20 @@ export default defineComponent({
       });
     };
 
+    // 清理所有选中的数据
+    const ClearSelected = () => {
+      todolists.todoItem = todolists.todoItem.filter((item, index) => {
+        return !item.isCheckbox;
+      });
+    };
+
     return {
       ...toRefs(todolists),
       addTodo,
       delTodo,
       updateCheckbox,
       checkAll,
+      ClearSelected,
     };
   },
 });
