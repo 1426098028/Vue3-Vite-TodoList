@@ -1,23 +1,22 @@
 <template>
-        <ul class="todo-main">
-      <Item />
-      </ul>
+  <ul class="todo-main">
+    <Item v-for="(todo, index) in todoItem" :key="index" :todo="todo" />
+  </ul>
 </template>
 <script>
-import Item from "../Item/Item.vue"
+import Item from "../Item/Item.vue";
 
-import { defineComponent } from "vue"
+import { defineComponent } from "vue";
 export default defineComponent({
-    name:"List",
-    setup(){
-        return{
-
-        }
-    },
-    components:{
-Item
-    }
-})
+  name: "List",
+  props: ["todoItem"],
+  setup() {
+    return {};
+  },
+  components: {
+    Item,
+  },
+});
 </script>
 <style>
 /*main*/
@@ -36,5 +35,4 @@ Item
   padding-left: 5px;
   margin-top: 10px;
 }
-
 </style>

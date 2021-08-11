@@ -1,46 +1,25 @@
 <template>
-      <li>
-          <label>
-            <input type="checkbox"/>
-            <span>yyyy</span>
-          </label>
-          <button class="btn btn-danger" style="display:none">删除</button>
-        </li>
-      <li>
-          <label>
-            <input type="checkbox"/>
-            <span>yyyy</span>
-          </label>
-          <button class="btn btn-danger" style="display:none">删除</button>
-        </li>
-      <li>
-          <label>
-            <input type="checkbox"/>
-            <span>yyyy</span>
-          </label>
-          <button class="btn btn-danger" style="display:none">删除</button>
-        </li>
-      <li>
-          <label>
-            <input type="checkbox"/>
-            <span>yyyy</span>
-          </label>
-          <button class="btn btn-danger" style="display:none">删除</button>
-        </li>
+  <li>
+    <label>
+      <input type="checkbox" v-model="todo.isCheckbox" />
+
+      <span>{{ todo.value }}</span>
+    </label>
+    <button class="btn btn-danger" style="display: none">删除</button>
+  </li>
 </template>
 <script>
-import {defineComponent} from "vue"
+import { defineComponent } from "vue";
 export default defineComponent({
-    name:"Item",
-    setup(){
-        return{
-            
-        }
-    }
-})
+  name: "Item",
+  props: ["todo"],
+  setup() {
+    return {};
+  },
+});
 </script>
 <style>
-    /*item*/
+/*item*/
 li {
   list-style: none;
   height: 36px;
