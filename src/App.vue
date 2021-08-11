@@ -34,10 +34,11 @@ export default defineComponent({
       console.log(Todo);
     };
     //删除数据
-    provide("delTodo", delTodo); //传递爷组件的方法给孙子组件
+
     const delTodo = (index) => {
       todolists.todoItem.splice(index, 1);
     };
+    provide("delTodo", delTodo); //传递爷组件的方法给孙子组件
 
     return {
       ...toRefs(todolists),

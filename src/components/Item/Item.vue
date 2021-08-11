@@ -14,7 +14,7 @@
   </li>
 </template>
 <script>
-import { defineComponent, ref, inject } from "vue";
+import { defineComponent, ref, inject, computed } from "vue";
 export default defineComponent({
   name: "Item", //孙子组件
   props: ["todo", "index"],
@@ -37,6 +37,7 @@ export default defineComponent({
         delTodo(props.index);
       }
     };
+
     return {
       Discoloration,
       Movein,
