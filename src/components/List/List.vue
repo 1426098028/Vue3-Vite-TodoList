@@ -10,7 +10,6 @@
 </template>
 <script>
 import Item from "../Item/Item.vue";
-
 import { defineComponent } from "vue";
 export default defineComponent({
   name: "List",

@@ -31,19 +31,24 @@ export default defineComponent({
     //添加数据
     const addTodo = (Todo) => {
       todolists.todoItem.unshift(Todo);
-      console.log(Todo);
     };
     //删除数据
-
     const delTodo = (index) => {
       todolists.todoItem.splice(index, 1);
     };
     provide("delTodo", delTodo); //传递爷组件的方法给孙子组件
 
+    // 修改todolists的isCheckbox属性的状态
+    const updateCheckbox = (todoItemVal, Checkbox) => {
+      todoItemVal.isCheckbox = Checkbox;
+    };
+    provide("updateCheckbox", updateCheckbox); // 传递爷组件的方法给孙子组件;
+
     return {
       ...toRefs(todolists),
       addTodo,
       delTodo,
+      updateCheckbox,
     };
   },
 });
