@@ -37,8 +37,8 @@ export default defineComponent({
     const Remove = () => {
       Discoloration.value = "RemoveColor";
     };
-    //删除数据方法
 
+    //删除数据方法
     const delTodo = inject("delTodo"); //接收爷组件的方法
     const Delete = () => {
       if (window.confirm("确定删除吗？")) {

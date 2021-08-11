@@ -3,7 +3,7 @@
     <div class="todo-wrap">
       <Header :addTodo="addTodo" />
       <List :todoItem="todoItem" />
-      <Footer />
+      <Footer :todoItem="todoItem" :checkAll="checkAll" />
     </div>
   </div>
 </template>
@@ -44,11 +44,19 @@ export default defineComponent({
     };
     provide("updateCheckbox", updateCheckbox); // 传递爷组件的方法给孙子组件;
 
+    // 全选或者是全不选的方法
+    const checkAll = (isCheckbox) => {
+      todolists.todoItem.forEach((item, index) => {
+        item.isCheckbox = isCheckbox;
+      });
+    };
+
     return {
       ...toRefs(todolists),
       addTodo,
       delTodo,
       updateCheckbox,
+      checkAll,
     };
   },
 });
